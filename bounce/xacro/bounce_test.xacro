@@ -7,8 +7,7 @@
     <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
     <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
 
-    <xacro:include filename="balls.xacro" />
-    <xacro:include filename="world_components.xacro" />
+    <xacro:include filename="bounce.xacro" />
 
     <xacro:ground_plane/>
     <xacro:sun/>
