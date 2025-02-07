@@ -1,0 +1,40 @@
+{
+	"name": "Gazebo Sim Tests",
+	"dockerFile": "Dockerfile",
+	"context": "../",
+	"build": {
+		"args": {
+			"WORKSPACE": "${containerWorkspaceFolder}"
+		}
+	},
+	"runArgs": [
+		// "--privileged", // For joystick tests
+		// "--network=host", // For ros comm ports
+		// For gdb
+		// "--cap-add=SYS_PTRACE",
+		// "--security-opt=seccomp:unconfined",
+		// For display sharing
+		"--security-opt=apparmor:unconfined",
+		"--volume=/tmp/.X11-unix:/tmp/.X11-unix",
+		"--volume=/dev/dri:/dev/dri" // for hardware acceleration without --privileged
+	],
+	"containerEnv": {
+		"DISPLAY": "${localEnv:DISPLAY}" // For display sharing
+	},
+	"postCreateCommand": ".devcontainer/postcreate.sh",
+	"remoteUser": "ubuntu",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"dotjoshjohnson.xml",
+				"ms-iot.vscode-ros",
+				"ms-vscode.cpptools",
+				"redhat.vscode-yaml",
+				"streetsidesoftware.code-spell-checker",
+				"twxs.cmake",
+				"yzhang.markdown-all-in-one"
+			]
+		}
+	},
+
+}
