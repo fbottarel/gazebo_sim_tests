@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<sdf version="1.7"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <world name="friction_test">
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+
+    <xacro:include filename="friction.xacro" />
+
+    <xacro:sun />
+    <xacro:ground_plane />
+
+    <xacro:static_plane name="ramp" length="10" width="10">
+      <pose>0 0 1 0 ${pi/8} 0 </pose>
+    </xacro:static_plane>
+
+    <!-- nominal cube -->
+    <!-- default friction is large  -->
+    <!-- should not move-->
+    <xacro:cube name="cube" mass="1" side="0.2" color="red">
+      <pose relative_to="ramp">0 2.0 0.11 0 0 0</pose>
+      <friction />
+    </xacro:cube>
+
+    <!-- cube with only mu -->
+    <!-- mu is friction along world axis 0, i.e. x -->
+    <!-- should not move -->
+    <xacro:cube name="cube_mu" mass="1" side="0.2" color="red">
+      <pose relative_to="ramp">0 1.5 0.11 0 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- cube with only mu2 -->
+    <!-- mu2 is friction along world axis 1, i.e. 1 -->
+    <!-- should move -->
+    <xacro:cube name="cube_mu2" mass="1" side="0.2" color="green">
+      <pose relative_to="ramp">0 1.0 0.11 0 0 0</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- cube with mu along fdir x-->
+    <!-- fdir specifies primary friction direction with respect to a body instead of world -->
+    <!-- cube x axis is aligned with world x axis + angle -->
+    <!-- should not move -->
+    <xacro:cube name="cube_mu_fdir_x" mass="1" side="0.2" color="red">
+      <pose relative_to="ramp">0 0.5 0.11 0 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+          <fdir1>1 0 0</fdir1>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- cube with mu along fdir y-->
+    <!-- fdir specifies primary friction direction with respect to a body instead of world -->
+    <!-- cube y axis is aligned with world y axis -->
+    <!-- should move -->
+    <xacro:cube name="cube_mu_fdir_y" mass="1" side="0.2" color="green">
+      <pose relative_to="ramp">0 0 0.11 0 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+          <fdir1>0 1 0</fdir1>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- cube with mu along fdir z-->
+    <!-- fdir specifies primary friction direction with respect to a body instead of world -->
+    <!-- cube x axis is aligned with world z axis + angle -->
+    <!-- should move -->
+    <xacro:cube name="cube_mu_fdir_z" mass="1" side="0.2" color="green">
+      <pose relative_to="ramp">0 -0.5 0.11 0 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+          <fdir1>0 0 1</fdir1>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- rotated cube with mu along fdir z-->
+    <!-- fdir specifies primary friction direction with respect to a body instead of world -->
+    <!-- cube x axis is aligned with world y axis -->
+    <!-- should move -->
+    <xacro:cube name="cube_mu_fdir_rot" mass="1" side="0.2" color="green">
+      <pose relative_to="ramp">0 -1.0 0.11 0 ${pi/2} 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+          <fdir1>1 0 0</fdir1>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- rotated cube with mu wrt world x axis -->
+    <!-- cube x axis is aligned with world y axis -->
+    <!-- should not move -->
+    <xacro:cube name="cube_mu_x_rot" mass="1" side="0.2" color="red">
+      <pose relative_to="ramp">0 -1.5 0.11 ${pi/2} 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+    <!-- rotated cube with mu wrt world x axis -->
+    <!-- cube is rotated -->
+    <!-- should not move -->
+    <xacro:cube name="cube_mu_xy_rot" mass="1" side="0.2" color="red">
+      <pose relative_to="ramp">0 -2.0 0.11 ${pi/2} ${pi/2} 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+          <mu2>0</mu2>
+        </ode>
+      </friction>
+    </xacro:cube>
+
+  </world>
+</sdf>
