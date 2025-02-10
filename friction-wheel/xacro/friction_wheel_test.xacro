@@ -1,0 +1,80 @@
+<sdf version="1.7"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <world name="friction_wheel_test">
+
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics" />
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands" />
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster" />
+
+    <xacro:include filename="friction_wheel.xacro" />
+
+    <xacro:sun />
+    <xacro:ground_plane />
+
+    <xacro:static_plane name="ramp" length="10" width="100">
+      <pose>0 0 1 0 ${pi/16} 0</pose>
+    </xacro:static_plane>
+
+    <xacro:wheel name="wheel_mu_no_fdir" mass="1" length=".5" radius="1" color="1 0 0 1">
+      <pose relative_to="ramp">0 -0.5 1 ${pi/2} 0 0</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu_no_fdir_oriented" mass="1" length=".5" radius="1" color="1 0 0 1">
+      <pose relative_to="ramp">0 0.5 1 ${pi/2} 0 ${pi/8}</pose>
+      <friction>
+        <ode>
+          <mu>1</mu>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu2_no_fdir" mass="1" length=".5" radius="1" color="0 1 0 1">
+      <pose relative_to="ramp">0 3.5 1 ${pi/2} 0 0</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu2_no_fdir_oriented" mass="1" length=".5" radius="1" color="0 1 0 1">
+      <pose relative_to="ramp">0 4.5 1 ${pi/2} 0 ${pi/8}</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu1_mu2_no_fdir" mass="1" length=".5" radius="1" color="1 1 0 1">
+      <pose relative_to="ramp">0 -4.5 1 ${pi/2} 0 0</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu1_mu2_no_fdir_oriented" mass="1" length=".5" radius="1" color="1 1 0 1">
+      <pose relative_to="ramp">0 -3.5 1 ${pi/2} 0 ${pi/8}</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+
+  </world>
+
+</sdf>
