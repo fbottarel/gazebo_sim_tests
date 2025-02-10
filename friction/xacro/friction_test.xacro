@@ -91,22 +91,22 @@
         <ode>
           <mu>1</mu>
           <mu2>0</mu2>
-          <fdir1>0 0.1 0.9</fdir1>
+          <fdir1>0 0 1</fdir1>
         </ode>
       </friction>
     </xacro:cube>
 
     <!-- rotated cube with mu along fdir z-->
     <!-- fdir specifies primary friction direction with respect to a body instead of world -->
-    <!-- cube x axis is aligned with world y axis -->
+    <!-- cube x axis is aligned with ramp z axis -->
     <!-- should move -->
     <xacro:cube name="cube_mu_fdir_rot" mass="1" side="0.2" color="green">
       <pose relative_to="ramp">0 -1.0 0.11 0 ${pi/2} 0</pose>
       <friction>
         <ode>
-          <mu>1</mu>
-          <mu2>0</mu2>
-          <fdir1>0.9 0 0.1</fdir1>
+          <mu>0</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
         </ode>
       </friction>
     </xacro:cube>
@@ -119,7 +119,6 @@
       <friction>
         <ode>
           <mu>1</mu>
-          <mu2>0</mu2>
         </ode>
       </friction>
     </xacro:cube>
@@ -132,7 +131,6 @@
       <friction>
         <ode>
           <mu>1</mu>
-          <mu2>0</mu2>
         </ode>
       </friction>
     </xacro:cube>
