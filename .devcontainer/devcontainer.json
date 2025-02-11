@@ -26,10 +26,9 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"dotjoshjohnson.xml",
 				"ms-iot.vscode-ros",
 				"ms-vscode.cpptools",
-				"redhat.vscode-yaml",
+				"redhat.vscode-xml",
 				"streetsidesoftware.code-spell-checker",
 				"twxs.cmake",
 				"yzhang.markdown-all-in-one"
