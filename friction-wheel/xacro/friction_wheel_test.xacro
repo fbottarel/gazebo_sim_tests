@@ -12,7 +12,7 @@
     <xacro:sun />
     <xacro:ground_plane />
 
-    <xacro:static_plane name="ramp" length="10" width="30">
+    <xacro:static_plane name="ramp" length="10" width="40">
       <pose>0 0 1 0 ${pi/16} 0</pose>
     </xacro:static_plane>
 
@@ -103,9 +103,32 @@
       </friction>
     </xacro:wheel>
 
+    <!-- friction along wheel tangent -->
+    <xacro:wheel name="wheel_mu2_fdir" mass="1" length=".5" radius="1" color="0.5 0.5 0.5 1">
+      <pose relative_to="ramp">0 9.5 1 ${pi/2} 0 0</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
+    <xacro:wheel name="wheel_mu2_fdir_oriented" mass="1" length=".5" radius="1" color="0.5 0.5 0.5 1">
+      <pose relative_to="ramp">0 10.5 1 ${pi/2} 0 ${pi/8}</pose>
+      <friction>
+        <ode>
+          <mu>0</mu>
+          <mu2>1</mu2>
+          <fdir1>1 0 0</fdir1>
+        </ode>
+      </friction>
+    </xacro:wheel>
+
     <!-- friction along wheel tangent and lateral direction -->
     <xacro:wheel name="wheel_mu1_mu2_fdir" mass="1" length=".5" radius="1" color="1 0 1 1">
-      <pose relative_to="ramp">0 9.5 1 ${pi/2} 0 0</pose>
+      <pose relative_to="ramp">0 14.5 1 ${pi/2} 0 0</pose>
       <friction>
         <ode>
           <mu>1</mu>
@@ -116,7 +139,7 @@
     </xacro:wheel>
 
     <xacro:wheel name="wheel_mu1_mu2_fdir_oriented" mass="1" length=".5" radius="1" color="1 0 1 1">
-      <pose relative_to="ramp">0 10.5 1 ${pi/2} 0 ${pi/8}</pose>
+      <pose relative_to="ramp">0 15.5 1 ${pi/2} 0 ${pi/8}</pose>
       <friction>
         <ode>
           <mu>1</mu>

@@ -7,3 +7,4 @@ It comes with a vscode-compatible devcontainer environment to set up test depend
 - [Bounce parameter test](./bounce/README.md)
 - [Friction test](./friction/README.md)
 - [Friction pyramid test](./friction-pyramid/README.md)
+- [Wheel friction test](./friction-wheel/README.md)
